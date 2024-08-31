@@ -11,7 +11,6 @@ int main() {
         clear = "clear";
     #endif
     
-    // Шаг 1: Подготовка текста
     std::string testText[] = {
         "Emma hurried through the park, her eyes scanning the ground.", 
         "She had just realized she lost her house key somewhere on her walk,", 
