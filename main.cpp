@@ -3,7 +3,7 @@
 #include <string>
 
 #ifdef _WIN32
-    #include <conio.h>  // для _getch() на Windows
+    #include <conio.h> 
     #define PRINT_ERROR system("color 4")
     #define DEFAULT_PRINT system("color 7")
 #else
@@ -12,7 +12,6 @@
     #define PRINT_ERROR std::cout << "\033[91m"
     #define DEFAULT_PRINT std::cout << "\033[0m"
 
-    // Реализация _getch() для Linux/Unix
         char _getch() {
         char buf = 0;
         struct termios old;
@@ -22,10 +21,10 @@
             perror("tcgetattr()");
         }
 
-        newt = old;  // Сохраняем текущие настройки
+        newt = old;  
 
-        newt.c_lflag &= ~ICANON;  // Отключаем буферизацию ввода (неканонический режим)
-        newt.c_lflag &= ~ECHO;    // Отключаем вывод символов в терминал
+        newt.c_lflag &= ~ICANON;  
+        newt.c_lflag &= ~ECHO;   
 
         if (tcsetattr(STDIN_FILENO, TCSANOW, &newt) < 0) {
             perror("tcsetattr ICANON");
@@ -35,7 +34,6 @@
             perror("read()");
         }
 
-        // Восстанавливаем старые параметры терминала
         if (tcsetattr(STDIN_FILENO, TCSADRAIN, &old) < 0) {
             perror("tcsetattr ~ICANON");
         }
@@ -52,7 +50,6 @@ bool valid_character(char ch) {
 }
 
 int main() {
-    // Шаг 1: Подготовка текста
     #ifdef _WIN32
         system("cls");
     #else 
@@ -83,10 +80,8 @@ int main() {
         }
         std::cout << "\n";
 
-        // Шаг 2: Измерение времени начала ввода
         auto start = std::chrono::steady_clock::now();
 
-        // Ввод текста в реальном времени с отображением ошибок
         size_t position = 0;
         bool inputCorrect = true;
 
@@ -119,13 +114,10 @@ int main() {
             }
         }
 
-        // Шаг 4: Измерение времени окончания ввода
         auto end = std::chrono::steady_clock::now();
 
-        // Шаг 5: Вычисление времени выполнения
         std::chrono::duration<double> elapsed_seconds = end - start;
 
-        // Очищение экрана
         #ifdef _WIN32
             system("cls");
         #else
@@ -142,13 +134,11 @@ int main() {
         std::cout << "Time taken: " << elapsed_seconds.count() << " seconds\n";
         std::cout << "Characters per minute: " << (userInput.size() / elapsed_seconds.count()) * 60 << "\n\n";
 
-        // Счётчик строк
         if (count == 10) {
             count = 0;
         } else if (inputCorrect) {
             count++;
         }
     }
-
     return 0;
 }
