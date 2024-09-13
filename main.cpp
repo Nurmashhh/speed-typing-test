@@ -86,21 +86,21 @@ int main() {
         bool inputCorrect = true;
 
         while (position < testText[count].size()) {
-            char ch = _getch();  // Считываем символ с клавиатуры
+            char ch = _getch(); 
 
-            if ((ch == 8 || ch == 127) && position > 0) {  // Обработка удаления символа (Backspace)
-                std::cout << "\b \b" << std::flush;  // Удаляем символ с экрана
-                userInput.pop_back();  // Удаляем последний символ из строки
+            if ((ch == 8 || ch == 127) && position > 0) { 
+                std::cout << "\b \b" << std::flush;  
+                userInput.pop_back();  
                 position--;
-            } else if (valid_character(ch)) {  // Если это не Backspace и не Enter
+            } else if (valid_character(ch)) { 
                 if (testText[count][position] != ch) {
-                    PRINT_ERROR;  // Выводим в красном цвете, если ошибка
+                    PRINT_ERROR; 
                     inputCorrect = false;
                 } else {
-                    DEFAULT_PRINT;  // Выводим в белом цвете, если правильно
+                    DEFAULT_PRINT; 
                 }
-                std::cout << ch << std::flush;  // Выводим символ на экран
-                userInput += ch;  // Добавляем символ в строку
+                std::cout << ch << std::flush;  
+                userInput += ch; 
                 position++;
             }
         }
