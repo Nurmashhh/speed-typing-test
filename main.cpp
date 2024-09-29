@@ -43,7 +43,7 @@
 #endif
 
 bool valid_character(char ch) {
-    if (ch != '\b' && ch != '\r' && ch != '\n' && (isalpha(ch) || ch == ' ' || ch == ',' || ch == '.' || ch == '?' || ch == '\'' || ch == '-')) {
+    if (isalpha(ch) || ch == ' ' || ch == ',' || ch == '.' || ch == '?' || ch == '\'' || ch == '-') {
         return true;
     }
     return false;
